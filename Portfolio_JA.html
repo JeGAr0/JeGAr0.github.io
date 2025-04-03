@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: white;
+        }
+        section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .project-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .project-card {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            display: none;
+        }
+        .project-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .project-card.active {
+            display: block;
+        }
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8);
+        }
+        .project-nav {
+            position: absolute;
+            bottom: -8px;
+            display: flex;
+            gap: 20px;
+        }
+        .project-nav button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .h2-Proyectos {
+            margin-top: 18vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jose E. Garcia</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="about">
+        <h2>Sobre Mí</h2>
+        <br>
+        <p> Estudiante de 2do de Desarrollo de Aplicaciones Web.<br>
+            <br>
+            Busco poder ganar experiencia en el campo de desarrollo web,<br>
+             poniendo mis aprendizajes a prueba y demostrando hasta <br>
+             donde puedo llegar. Quiero poner en práctica real todo lo <br>
+             aprendido teórico a fin de llevarlo al campo laboral real,<br>
+             saliendo un poco de la zona segura que suponen los proyectos
+             en local.</p>
+    </section>
+    
+    <section id="projects">
+        <h2 class="h2-Proyectos">Proyectos</h2>
+        <div class="project-container">
+            <div class="project-card active">
+                <img src="./img/KreaLabProjecte.png" alt="Proyecto 1">
+                <h3>Krea Lab</h3>
+                <p>Krea Lab</p>
+            </div>
+            <div class="project-card">  
+                <img src="./img/TacoLocoProyecto.png" alt="Proyecto 2">
+                <h3>Taco Loco</h3>
+                <p>Taco Loco</p>
+            </div>
+            <div class="project-card">
+                <img src="./img/SalaLumiereProyecto.png" alt="Sala Lumiere">
+                <h3>Sala Lumiere</h3>
+                <p>Creacion de una cartelera de cine, en esta se podia ver en un calendario las peliculas para el dia. Ademas de poder ver todas las peliculas en un apartado y poder reservar.</p>
+            </div>
+            <div class="project-nav">
+                <button onclick="prevProject()">Anterior</button>
+                <button onclick="nextProject()">Siguiente</button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2>Contacto</h2>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:correo@example.com">correo@example.com</a></p>
+            <p>Teléfono: <a href="tel:+123456789">+123 456 789</a></p>
+            <p>GitHub: <a href="https://github.com/usuario" target="_blank">github.com/usuario</a></p>
+            <p>LinkedIn: <a href="https://linkedin.com/in/usuario" target="_blank">linkedin.com/in/usuario</a></p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Jose E. Garcia</p>
+    </footer>
+    
+    <script>
+        let currentProject = 0;
+        const projects = document.querySelectorAll('.project-card');
+        function showProject(index) {
+            projects.forEach((proj, i) => {
+                proj.classList.toggle('active', i === index);
+            });
+        }
+        function nextProject() {
+            currentProject = (currentProject + 1) % projects.length;
+            showProject(currentProject);
+        }
+        function prevProject() {
+            currentProject = (currentProject - 1 + projects.length) % projects.length;
+            showProject(currentProject);
+        }
+    </script>
+</body>
+</html>
